@@ -23,6 +23,7 @@
  */
 package arsip.surat.view;
 
+import arsip.surat.util.DragWindowUtil;
 /**
  *
  * @author Muhammad Rosyid Izzulkhaq (rsdiz)
@@ -34,6 +35,7 @@ public class LoginView extends javax.swing.JFrame {
      */
     public LoginView() {
         initComponents();
+        DragWindowUtil.enable(LoginView.this);
     }
 
     /**
@@ -50,6 +52,7 @@ public class LoginView extends javax.swing.JFrame {
         title_text = new javax.swing.JLabel();
         minimizedIcon = new javax.swing.JLabel();
         exitIcon = new javax.swing.JLabel();
+        contentPanel = new javax.swing.JPanel();
         loginPanel = new javax.swing.JPanel();
         passwordPanel = new javax.swing.JPanel();
         passwordTextField = new javax.swing.JPasswordField();
@@ -61,9 +64,10 @@ public class LoginView extends javax.swing.JFrame {
         chk_login = new javax.swing.JCheckBox();
         login_text = new javax.swing.JLabel();
         separator = new javax.swing.JSeparator();
-        made_with_love = new javax.swing.JLabel();
         copyright_text = new javax.swing.JLabel();
+        made_with_love = new javax.swing.JLabel();
         version_text = new javax.swing.JLabel();
+        aboutDeveloper = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -73,10 +77,10 @@ public class LoginView extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(800, 600));
         setName("frame-login"); // NOI18N
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(800, 600));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         basePanel.setBackground(new java.awt.Color(255, 255, 255));
+        basePanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         basePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         customTitleBar.setBackground(new java.awt.Color(242, 242, 242));
@@ -101,7 +105,7 @@ public class LoginView extends javax.swing.JFrame {
                 minimizedIconMouseExited(evt);
             }
         });
-        customTitleBar.add(minimizedIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 0, 30, 50));
+        customTitleBar.add(minimizedIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 0, 30, 50));
 
         exitIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         exitIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arsip/surat/assets/images/close~1.png"))); // NOI18N
@@ -116,9 +120,16 @@ public class LoginView extends javax.swing.JFrame {
                 exitIconMouseExited(evt);
             }
         });
-        customTitleBar.add(exitIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 0, 30, 50));
+        customTitleBar.add(exitIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 0, 30, 50));
 
-        basePanel.add(customTitleBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 50));
+        basePanel.add(customTitleBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 5, 790, 50));
+
+        contentPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                contentPanelMouseClicked(evt);
+            }
+        });
+        contentPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         loginPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 4));
         loginPanel.setPreferredSize(new java.awt.Dimension(350, 420));
@@ -129,7 +140,9 @@ public class LoginView extends javax.swing.JFrame {
 
         passwordTextField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         passwordTextField.setText("password");
+        passwordTextField.setFocusCycleRoot(true);
         passwordTextField.setMargin(new java.awt.Insets(2, 12, 2, 12));
+        passwordTextField.setNextFocusableComponent(chk_login);
         passwordPanel.add(passwordTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 240, 50));
 
         passwordIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arsip/surat/assets/images/unlocked~1.png"))); // NOI18N
@@ -143,7 +156,9 @@ public class LoginView extends javax.swing.JFrame {
         usernameTextField.setFont(new java.awt.Font("monogram", 0, 24)); // NOI18N
         usernameTextField.setForeground(new java.awt.Color(55, 55, 55));
         usernameTextField.setText("Username/Email");
+        usernameTextField.setFocusCycleRoot(true);
         usernameTextField.setMargin(new java.awt.Insets(2, 12, 2, 12));
+        usernameTextField.setNextFocusableComponent(passwordTextField);
         usernamePanel.add(usernameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 240, 50));
 
         usernameIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arsip/surat/assets/images/user~1.png"))); // NOI18N
@@ -157,43 +172,52 @@ public class LoginView extends javax.swing.JFrame {
 
         chk_login.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         chk_login.setText("Biarkan saya tetap masuk?");
-        chk_login.setToolTipText("Ketika anda membuka aplikasi ini dikemudian hari, anda tidak perlu memasukkan password kembali.");
+        chk_login.setToolTipText("<html>Ketika anda membuka aplikasi ini dikemudian hari,<br>\nanda tidak perlu memasukkan password kembali.</html>");
+        chk_login.setNextFocusableComponent(btnMasuk);
         loginPanel.add(chk_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 190, 30));
 
         login_text.setFont(new java.awt.Font("monogram", 0, 36)); // NOI18N
         login_text.setForeground(new java.awt.Color(10, 10, 10));
         login_text.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         login_text.setText("Login");
+        login_text.setFocusCycleRoot(true);
         loginPanel.add(login_text, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 310, 50));
         loginPanel.add(separator, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 310, 10));
 
-        basePanel.add(loginPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, -1, -1));
-
-        made_with_love.setFont(new java.awt.Font("monogram", 0, 20)); // NOI18N
-        made_with_love.setForeground(new java.awt.Color(100, 100, 100));
-        made_with_love.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        made_with_love.setText("Made with <3");
-        basePanel.add(made_with_love, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 550, 130, 20));
+        contentPanel.add(loginPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, -1, -1));
 
         copyright_text.setFont(new java.awt.Font("monogram", 0, 20)); // NOI18N
         copyright_text.setForeground(new java.awt.Color(100, 100, 100));
         copyright_text.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         copyright_text.setText("Copyright 2020 UTY Hebat");
-        basePanel.add(copyright_text, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 510, 350, 40));
+        contentPanel.add(copyright_text, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 450, 350, 40));
+
+        made_with_love.setFont(new java.awt.Font("monogram", 0, 20)); // NOI18N
+        made_with_love.setForeground(new java.awt.Color(100, 100, 100));
+        made_with_love.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        made_with_love.setText("Made with <3");
+        contentPanel.add(made_with_love, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 490, 130, 20));
 
         version_text.setFont(new java.awt.Font("monogram", 0, 24)); // NOI18N
         version_text.setForeground(new java.awt.Color(100, 100, 100));
         version_text.setText("Versi 1.0");
-        basePanel.add(version_text, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 560, -1, -1));
+        contentPanel.add(version_text, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 500, -1, -1));
+
+        aboutDeveloper.setFont(new java.awt.Font("Socialico Plus Plus", 0, 48)); // NOI18N
+        aboutDeveloper.setForeground(new java.awt.Color(100, 100, 100));
+        aboutDeveloper.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        aboutDeveloper.setText("z");
+        aboutDeveloper.setToolTipText("About Developer");
+        aboutDeveloper.setPreferredSize(new java.awt.Dimension(80, 50));
+        contentPanel.add(aboutDeveloper, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 450, -1, -1));
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arsip/surat/assets/images/bg.jpg"))); // NOI18N
-        background.setPreferredSize(new java.awt.Dimension(800, 550));
-        basePanel.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 55, 790, 540));
+        background.setPreferredSize(new java.awt.Dimension(790, 540));
+        contentPanel.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        basePanel.add(contentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 55, 790, 540));
 
         getContentPane().add(basePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 600));
-
-        pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -229,7 +253,7 @@ public class LoginView extends javax.swing.JFrame {
     }//GEN-LAST:event_exitIconMouseEntered
 
     /**
-     * Merubah gambat icon exit seperti semula
+     * Merubah gambar icon exit seperti semula
      * @param evt 
      */
     private void exitIconMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitIconMouseExited
@@ -243,6 +267,10 @@ public class LoginView extends javax.swing.JFrame {
     private void exitIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitIconMouseClicked
         System.exit(0);
     }//GEN-LAST:event_exitIconMouseClicked
+
+    private void contentPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contentPanelMouseClicked
+        // DO NOTHING
+    }//GEN-LAST:event_contentPanelMouseClicked
 
     /**
      * @param args the command line arguments
@@ -274,10 +302,12 @@ public class LoginView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel aboutDeveloper;
     private javax.swing.JLabel background;
     private javax.swing.JPanel basePanel;
     private javax.swing.JButton btnMasuk;
     private javax.swing.JCheckBox chk_login;
+    private javax.swing.JPanel contentPanel;
     private javax.swing.JLabel copyright_text;
     private javax.swing.JPanel customTitleBar;
     private javax.swing.JLabel exitIcon;
