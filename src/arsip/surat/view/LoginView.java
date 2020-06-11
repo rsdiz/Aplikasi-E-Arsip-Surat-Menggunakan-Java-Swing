@@ -24,19 +24,33 @@
 package arsip.surat.view;
 
 import arsip.surat.util.DragWindowUtil;
+import java.awt.Frame;
 /**
  *
  * @author Muhammad Rosyid Izzulkhaq (rsdiz)
  */
 public class LoginView extends javax.swing.JFrame {
 
+    private static LoginView loginView;
+    
     /**
      * Creates new form LoginView
      */
-    public LoginView() {
+    private LoginView() {
         initComponents();
-        DragWindowUtil.enable(LoginView.this);
+        new DragWindowUtil().enable(LoginView.this);
     }
+    
+    /**
+     * <editor-fold defaultstate="collapsed" desc="Singleton pattern">
+     * @return instance of LoginView
+     */
+    public static LoginView getInstance() {
+        if (loginView == null) {
+            loginView = new LoginView();
+        }
+        return loginView;
+    } // </editor-fold>
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -81,6 +95,7 @@ public class LoginView extends javax.swing.JFrame {
 
         basePanel.setBackground(new java.awt.Color(255, 255, 255));
         basePanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        basePanel.setPreferredSize(null);
         basePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         customTitleBar.setBackground(new java.awt.Color(242, 242, 242));
@@ -209,6 +224,11 @@ public class LoginView extends javax.swing.JFrame {
         aboutDeveloper.setText("z");
         aboutDeveloper.setToolTipText("About Developer");
         aboutDeveloper.setPreferredSize(new java.awt.Dimension(80, 50));
+        aboutDeveloper.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                aboutDeveloperMouseClicked(evt);
+            }
+        });
         contentPanel.add(aboutDeveloper, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 450, -1, -1));
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arsip/surat/assets/images/bg.jpg"))); // NOI18N
@@ -221,57 +241,72 @@ public class LoginView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * Merubah gambar icon minimize ketika mouse entered
+     * <editor-fold defaultstate="collapsed" desc="Merubah gambar icon minimize ketika mouse entered">
      * @param evt 
      */
     private void minimizedIconMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizedIconMouseEntered
         minimizedIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arsip/surat/assets/images/minimized-hover~1.png")));
     }//GEN-LAST:event_minimizedIconMouseEntered
-
+    // </editor-fold>
     /**
-     * Merubah gambar icon minimized seperti semula
+     * <editor-fold defaultstate="collapsed" desc="Merubah gambar icon minimized seperti semula">
      * @param evt 
      */
     private void minimizedIconMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizedIconMouseExited
         minimizedIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arsip/surat/assets/images/minimized~1.png")));
     }//GEN-LAST:event_minimizedIconMouseExited
-
+    // </editor-fold>
     /**
-     * Mengubah state window menjadi iconified ketika icon diklik
+     * <editor-fold defaultstate="collapsed" desc="Mengubah state window menjadi iconified ketika icon diklik">
      * @param evt 
      */
     private void minimizedIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizedIconMouseClicked
-        this.setState(LoginView.ICONIFIED);
+        this.setState(Frame.ICONIFIED);
     }//GEN-LAST:event_minimizedIconMouseClicked
-
+    // </editor-fold>
     /**
-     * Merubah gambar icon exit ketika mouse entered
+     * <editor-fold defaultstate="collapsed" desc="Merubah gambar icon exit ketika mouse entered">
      * @param evt 
      */
     private void exitIconMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitIconMouseEntered
         exitIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arsip/surat/assets/images/close-hover~1.png")));
     }//GEN-LAST:event_exitIconMouseEntered
-
+    // </editor-fold>
     /**
-     * Merubah gambar icon exit seperti semula
+     * <editor-fold defaultstate="collapsed" desc="Merubah gambar icon exit seperti semula">
      * @param evt 
      */
     private void exitIconMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitIconMouseExited
         exitIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arsip/surat/assets/images/close~1.png")));
     }//GEN-LAST:event_exitIconMouseExited
-
+    // </editor-fold>
     /**
-     * Aksi ketika tombol diklik, maka aplikasi keluar
+     * <editor-fold defaultstate="collapsed" desc="Aksi ketika tombol diklik, maka aplikasi keluar">
      * @param evt 
      */
     private void exitIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitIconMouseClicked
         System.exit(0);
     }//GEN-LAST:event_exitIconMouseClicked
-
+    // </editor-fold>
+    /**
+     * <editor-fold defaultstate="collapsed" desc="Membuat frame tidak bisa didrag">
+     * @param evt 
+     */
     private void contentPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contentPanelMouseClicked
         // DO NOTHING
     }//GEN-LAST:event_contentPanelMouseClicked
-
+    // </editor-fold>
+    /**
+     * <editor-fold defaultstate="collapsed" desc="Menampilkan frame AboutDeveloperView">
+     * @param evt 
+     */
+    private void aboutDeveloperMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aboutDeveloperMouseClicked
+        minimizedIconMouseClicked(evt);
+        loginView.setVisible(false);
+        AboutDeveloperView.getInstance().setVisible(true);
+    }//GEN-LAST:event_aboutDeveloperMouseClicked
+    // </editor-fold>
+    
     /**
      * @param args the command line arguments
      */
@@ -301,6 +336,7 @@ public class LoginView extends javax.swing.JFrame {
         });
     }
 
+    // <editor-fold defaultstate="collapsed" desc="Deklarasi Variabel">
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel aboutDeveloper;
     private javax.swing.JLabel background;
@@ -314,7 +350,7 @@ public class LoginView extends javax.swing.JFrame {
     private javax.swing.JPanel loginPanel;
     private javax.swing.JLabel login_text;
     private javax.swing.JLabel made_with_love;
-    private javax.swing.JLabel minimizedIcon;
+    public javax.swing.JLabel minimizedIcon;
     private javax.swing.JLabel passwordIcon;
     private javax.swing.JPanel passwordPanel;
     private javax.swing.JPasswordField passwordTextField;
@@ -325,4 +361,5 @@ public class LoginView extends javax.swing.JFrame {
     private javax.swing.JTextField usernameTextField;
     private javax.swing.JLabel version_text;
     // End of variables declaration//GEN-END:variables
+    // </editor-fold>
 }

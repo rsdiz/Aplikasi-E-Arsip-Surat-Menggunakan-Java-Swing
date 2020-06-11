@@ -38,13 +38,13 @@ public class DragWindowUtil {
     public DragWindowUtil() {
     }
     
-    public static void enable(Component component) {
+    public void enable(Component component) {
         DragWindowListener listener = new DragWindowListener();
         component.addMouseListener(listener);
         component.addMouseMotionListener(listener);
     }
     
-    private static class DragWindowListener extends MouseInputAdapter {
+    private class DragWindowListener extends MouseInputAdapter {
         
         private Point pointLocation;
         private MouseEvent mousesPressed;
