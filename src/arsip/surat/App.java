@@ -44,7 +44,7 @@ public class App implements Runnable {
     private final LoginView loginView;
 
     public App() {
-        loginView = new LoginView();
+        loginView = LoginView.getInstance();
     }
     
     public void start() {
