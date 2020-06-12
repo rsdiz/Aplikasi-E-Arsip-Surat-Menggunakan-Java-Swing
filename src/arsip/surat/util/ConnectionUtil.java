@@ -40,8 +40,8 @@ public class ConnectionUtil {
     private static final Logger LOG = Logger.getLogger(ConnectionUtil.class.getName());
     
     private static Connection DB_CONNECTION = null;
-    private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    private static final String DB_URL = "jdbc:mysql://localhost/db_arsipsurat";
+    private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
+    private static final String DB_URL = "jdbc:mysql://localhost/surat_masuk_keluar";
     private static final String USER = "root";
     private static final String PASS = "";
     
@@ -77,7 +77,7 @@ public class ConnectionUtil {
      */
     public static Connection getConnection() {
         if (DB_CONNECTION == null) {
-            return null;
+            getInstance();
         }
         
         return DB_CONNECTION;

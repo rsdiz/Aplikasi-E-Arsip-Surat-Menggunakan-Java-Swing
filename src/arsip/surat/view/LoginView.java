@@ -23,8 +23,12 @@
  */
 package arsip.surat.view;
 
+import arsip.surat.service.LoginService;
 import arsip.surat.util.DragWindowUtil;
+import arsip.surat.util.PreferencedHelper;
 import java.awt.Frame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Muhammad Rosyid Izzulkhaq (rsdiz)
@@ -32,7 +36,8 @@ import java.awt.Frame;
 public class LoginView extends javax.swing.JFrame {
 
     private static LoginView loginView;
-    
+    private final LoginService loginService = new LoginService();
+
     /**
      * Creates new form LoginView
      */
@@ -40,16 +45,27 @@ public class LoginView extends javax.swing.JFrame {
         initComponents();
         new DragWindowUtil().enable(LoginView.this);
     }
-    
+
     /**
+     * Singleton pattern
      * <editor-fold defaultstate="collapsed" desc="Singleton pattern">
-     * @return instance of LoginView
+     * 
+     * @return 
      */
     public static LoginView getInstance() {
         if (loginView == null) {
             loginView = new LoginView();
         }
         return loginView;
+    } // </editor-fold>
+    /**
+     * <editor-fold defaultstate="collapsed" desc="Membersihkan instance yang sudah dibuat">
+     * Membersihkan instance yang sudah dibuat
+     */
+    public static void clearInstance() {
+        if (loginView != null) {
+            loginView = null;
+        }
     } // </editor-fold>
 
     /**
@@ -95,7 +111,7 @@ public class LoginView extends javax.swing.JFrame {
 
         basePanel.setBackground(new java.awt.Color(255, 255, 255));
         basePanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        basePanel.setPreferredSize(null);
+        basePanel.setFocusCycleRoot(true);
         basePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         customTitleBar.setBackground(new java.awt.Color(242, 242, 242));
@@ -183,6 +199,11 @@ public class LoginView extends javax.swing.JFrame {
 
         btnMasuk.setFont(new java.awt.Font("monogram", 0, 36)); // NOI18N
         btnMasuk.setText("MASUK");
+        btnMasuk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMasukActionPerformed(evt);
+            }
+        });
         loginPanel.add(btnMasuk, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 290, 60));
 
         chk_login.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -238,73 +259,150 @@ public class LoginView extends javax.swing.JFrame {
         basePanel.add(contentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 55, 790, 540));
 
         getContentPane().add(basePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 600));
+
+        pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
+     * Merubah gambar icon minimize ketika mouse entered
      * <editor-fold defaultstate="collapsed" desc="Merubah gambar icon minimize ketika mouse entered">
-     * @param evt 
+     *
+     * @param evt
      */
     private void minimizedIconMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizedIconMouseEntered
         minimizedIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arsip/surat/assets/images/minimized-hover~1.png")));
     }//GEN-LAST:event_minimizedIconMouseEntered
     // </editor-fold>
     /**
+     * Merubah gambar icon minimized seperti semula
      * <editor-fold defaultstate="collapsed" desc="Merubah gambar icon minimized seperti semula">
-     * @param evt 
+     *
+     * @param evt
      */
     private void minimizedIconMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizedIconMouseExited
         minimizedIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arsip/surat/assets/images/minimized~1.png")));
     }//GEN-LAST:event_minimizedIconMouseExited
     // </editor-fold>
     /**
+     * Mengubah state window menjadi iconified ketika icon diklik
      * <editor-fold defaultstate="collapsed" desc="Mengubah state window menjadi iconified ketika icon diklik">
-     * @param evt 
+     *
+     * @param evt
      */
     private void minimizedIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizedIconMouseClicked
         this.setState(Frame.ICONIFIED);
     }//GEN-LAST:event_minimizedIconMouseClicked
     // </editor-fold>
     /**
+     * Merubah gambar icon exit ketika mouse entered
      * <editor-fold defaultstate="collapsed" desc="Merubah gambar icon exit ketika mouse entered">
-     * @param evt 
+     *
+     * @param evt
      */
     private void exitIconMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitIconMouseEntered
         exitIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arsip/surat/assets/images/close-hover~1.png")));
     }//GEN-LAST:event_exitIconMouseEntered
     // </editor-fold>
     /**
+     * Merubah gambar icon exit seperti semula
      * <editor-fold defaultstate="collapsed" desc="Merubah gambar icon exit seperti semula">
-     * @param evt 
+     *
+     * @param evt
      */
     private void exitIconMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitIconMouseExited
         exitIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arsip/surat/assets/images/close~1.png")));
     }//GEN-LAST:event_exitIconMouseExited
     // </editor-fold>
     /**
+     * Aksi ketika tombol diklik, maka aplikasi keluar
      * <editor-fold defaultstate="collapsed" desc="Aksi ketika tombol diklik, maka aplikasi keluar">
-     * @param evt 
+     *
+     * @param evt
      */
     private void exitIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitIconMouseClicked
         System.exit(0);
     }//GEN-LAST:event_exitIconMouseClicked
     // </editor-fold>
     /**
+     * Membuat frame tidak bisa didrag
      * <editor-fold defaultstate="collapsed" desc="Membuat frame tidak bisa didrag">
-     * @param evt 
+     *
+     * @param evt
      */
     private void contentPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contentPanelMouseClicked
         // DO NOTHING
     }//GEN-LAST:event_contentPanelMouseClicked
     // </editor-fold>
     /**
+     * Menampilkan frame AboutDeveloperView
      * <editor-fold defaultstate="collapsed" desc="Menampilkan frame AboutDeveloperView">
-     * @param evt 
+     *
+     * @param evt
      */
     private void aboutDeveloperMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aboutDeveloperMouseClicked
         minimizedIconMouseClicked(evt);
         loginView.setVisible(false);
         AboutDeveloperView.getInstance().setVisible(true);
     }//GEN-LAST:event_aboutDeveloperMouseClicked
+    // </editor-fold>
+    /**
+     * Proses Login
+     * <editor-fold defaultstate="collapsed" desc="Proses Login">
+     *
+     * @param evt
+     */
+    private void btnMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMasukActionPerformed
+        Thread thread = new Thread("Login-Proccess") {
+            @Override
+            public void run() {
+                String username = usernameTextField.getText();
+                String password = String.valueOf(passwordTextField.getPassword());
+                boolean stayLogin = chk_login.isSelected();
+                if (!username.isEmpty() && !password.isEmpty()) {
+                    int doLogin = loginService.loginProcess(username, password, stayLogin);
+                    switch (doLogin) {
+                        case -1:
+                        case 0:
+                            JOptionPane.showMessageDialog(LoginView.this,
+                                    "Username atau password yang anda masukkan salah!\nSilahkan ulangi kembali!",
+                                    "Login Gagal!",
+                                     JOptionPane.WARNING_MESSAGE);
+                            break;
+                        case 1:
+                            JOptionPane.showMessageDialog(LoginView.this,
+                                    "Berhasil Login!",
+                                    "Login Sukses!",
+                                     JOptionPane.INFORMATION_MESSAGE);
+                            gotoDashboard();
+                            break;
+                        case 2:
+                            JOptionPane.showMessageDialog(LoginView.this,
+                                    "Terjadi kesalahan!\nSilahkan ulangi beberapa saat lagi!",
+                                    "Error!",
+                                     JOptionPane.WARNING_MESSAGE);
+                            break;
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(LoginView.this,
+                            "Kolom Username atau password tidak boleh kosong!\nSilahkan isi terlebih dahulu!",
+                            "Error!",
+                            JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        };
+        thread.start();
+    }//GEN-LAST:event_btnMasukActionPerformed
+    // </editor-fold>
+    /**
+     * Pindah form ke dashboard
+     * <editor-fold defaultstate="collapsed" desc="Pindah form ke dashboard">
+     */
+    private void gotoDashboard() {
+        loginView.dispose();
+        DashboardView dashboardView = DashboardView.getInstance();
+        dashboardView.setVisible(true);
+    }
     // </editor-fold>
     
     /**
@@ -327,12 +425,15 @@ public class LoginView extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
-        //</editor-fold>
 
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new LoginView().setVisible(true);
+            if (PreferencedHelper.getLogin()) {
+                LoginView.getInstance().gotoDashboard();
+            } else {
+                LoginView.getInstance().setVisible(true);
+            }
         });
     }
 
