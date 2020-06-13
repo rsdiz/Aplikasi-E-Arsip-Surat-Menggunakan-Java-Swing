@@ -49,7 +49,7 @@ public class LoginDataAccessService implements LoginDao {
             ps.setString(1, username);
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()) {
-                String salt = resultSet.getInt("id_user") + " " + resultSet.getString("username");
+                String salt = resultSet.getString("username") + " " + password;
                 byte[] encryptSalt = salt.getBytes();
                 salt = Base64.getEncoder().encodeToString(encryptSalt);
                 boolean isMatch = PasswordUtil.veriifyPassword(password, resultSet.getString("password"), salt);
