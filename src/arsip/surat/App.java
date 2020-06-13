@@ -23,7 +23,6 @@
  */
 package arsip.surat;
 
-import arsip.surat.util.ConnectionUtil;
 import arsip.surat.view.LoginView;
 import com.sun.java.swing.plaf.windows.WindowsLookAndFeel;
 import java.util.logging.Level;
@@ -45,7 +44,6 @@ public class App implements Runnable {
     private final LoginView loginView;
 
     public App() {
-        ConnectionUtil.getInstance();
         loginView = LoginView.getInstance();
     }
     

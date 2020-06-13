@@ -24,6 +24,7 @@
 package arsip.surat.view;
 
 import arsip.surat.util.DragWindowUtil;
+import arsip.surat.view.panel.PanelMenuPetugas;
 
 /**
  *
@@ -39,6 +40,8 @@ public class DashboardView extends javax.swing.JFrame {
     private DashboardView() {
         initComponents();
         new DragWindowUtil().enable(DashboardView.this);
+        PanelMenuPetugas panel = new PanelMenuPetugas();
+        baseTabbedPanel.addTab("   Petugas   ", panel);
     }
     
     /**
@@ -76,7 +79,6 @@ public class DashboardView extends javax.swing.JFrame {
         panelSuratKeluar = new javax.swing.JPanel();
         panelDisposisi = new javax.swing.JPanel();
         panelBidang = new javax.swing.JPanel();
-        panelPetugas = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("E-Arsip Surat: Dashboard");
@@ -141,24 +143,14 @@ public class DashboardView extends javax.swing.JFrame {
         contentPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelKiri.setBackground(new java.awt.Color(121, 121, 121));
-
-        javax.swing.GroupLayout panelKiriLayout = new javax.swing.GroupLayout(panelKiri);
-        panelKiri.setLayout(panelKiriLayout);
-        panelKiriLayout.setHorizontalGroup(
-            panelKiriLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
-        );
-        panelKiriLayout.setVerticalGroup(
-            panelKiriLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 740, Short.MAX_VALUE)
-        );
-
-        contentPanel.add(panelKiri, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 740));
+        panelKiri.setPreferredSize(new java.awt.Dimension(200, 740));
+        panelKiri.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        contentPanel.add(panelKiri, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         baseTabbedPanel.setBackground(new java.awt.Color(0, 100, 120));
-        baseTabbedPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         baseTabbedPanel.setForeground(new java.awt.Color(0, 100, 120));
         baseTabbedPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        baseTabbedPanel.setPreferredSize(new java.awt.Dimension(990, 740));
 
         panelDashboard.setBackground(new java.awt.Color(215, 215, 215));
         panelDashboard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -180,11 +172,7 @@ public class DashboardView extends javax.swing.JFrame {
         panelBidang.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         baseTabbedPanel.addTab("   Bidang   ", panelBidang);
 
-        panelPetugas.setBackground(new java.awt.Color(215, 215, 215));
-        panelPetugas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        baseTabbedPanel.addTab("   Petugas   ", panelPetugas);
-
-        contentPanel.add(baseTabbedPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 2, 1040, 740));
+        contentPanel.add(baseTabbedPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 0, -1, -1));
 
         basePanel.add(contentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 55, 1190, 740));
 
@@ -290,15 +278,11 @@ public class DashboardView extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DashboardView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DashboardView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DashboardView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(DashboardView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        
         //</editor-fold>
 
         /* Create and display the form */
@@ -319,7 +303,6 @@ public class DashboardView extends javax.swing.JFrame {
     private javax.swing.JPanel panelDashboard;
     private javax.swing.JPanel panelDisposisi;
     private javax.swing.JPanel panelKiri;
-    private javax.swing.JPanel panelPetugas;
     private javax.swing.JPanel panelSuratKeluar;
     private javax.swing.JPanel panelSuratMasuk;
     private javax.swing.JLabel title_text;
