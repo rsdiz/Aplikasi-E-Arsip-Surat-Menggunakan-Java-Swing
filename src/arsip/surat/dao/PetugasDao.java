@@ -49,6 +49,14 @@ public interface PetugasDao {
     int updatePetugasByNIP(String nip, Petugas petugas);
     
     /**
+     * Fungsi untuk mengubah Password dari petugas berdasarkan NIP
+     * @param nip
+     * @param password
+     * @return 0=Gagal, 1=Sukses
+     */
+    int updatePasswordByNIP(String nip, String password);
+    
+    /**
      * Fungsi untuk menghapus Petugas berdasarkan NIP
      * @param nip
      * @return 0=Gagal, 1=Sukses

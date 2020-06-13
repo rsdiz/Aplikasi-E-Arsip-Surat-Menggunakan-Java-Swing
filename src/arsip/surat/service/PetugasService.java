@@ -63,6 +63,10 @@ public class PetugasService {
         return petugasDao.updatePetugasByNIP(nip, petugas);
     }
     
+    public int updatePasswordByNIP(String nip, String password) {
+        return petugasDao.updatePasswordByNIP(nip, password);
+    }
+    
     public int deletePetugasByNIP(String nip) {
         return petugasDao.deletePetugasByNIP(nip);
     }

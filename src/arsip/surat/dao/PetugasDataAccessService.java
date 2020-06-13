@@ -25,12 +25,14 @@ package arsip.surat.dao;
 
 import arsip.surat.model.Petugas;
 import arsip.surat.util.ConnectionUtil;
+import arsip.surat.util.PasswordUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -100,6 +102,20 @@ public class PetugasDataAccessService implements PetugasDao {
                     return 0;
                 })
                 .orElse(0);
+    }
+    
+    @Override
+    public int updatePasswordByNIP(String nip, String password) {
+        Optional<Petugas> petugas = selectPetugasByNIP(nip);
+        if (petugas.isPresent()) {
+            String salt = petugas.get().getUsername() + " " + password;
+            byte[] encryptSalt = salt.getBytes();
+            salt = Base64.getEncoder().encodeToString(encryptSalt);
+            String encryptPassword = PasswordUtil.generateSecurePassword(password, salt);
+            petugas.get().setPassword(encryptPassword);
+            return updatePetugasByNIP(nip, petugas.get());
+        }
+        return 0;
     }
 
     @Override
