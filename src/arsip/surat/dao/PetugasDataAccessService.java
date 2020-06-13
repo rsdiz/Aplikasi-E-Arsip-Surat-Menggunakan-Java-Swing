@@ -110,6 +110,7 @@ public class PetugasDataAccessService implements PetugasDao {
             final String sql = "CALL delete_petugas(?)";
             try (PreparedStatement ps = connection.prepareCall(sql)) {
                 ps.setString(1, nip);
+                ps.executeUpdate();
                 DB.remove(selectPetugas.get());
                 connection.close();
                 return 1;
