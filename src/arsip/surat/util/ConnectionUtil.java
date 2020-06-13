@@ -36,7 +36,6 @@ import java.util.logging.Logger;
  */
 public class ConnectionUtil {
     
-    private static ConnectionUtil connectionUtil;
     private static final Logger LOG = Logger.getLogger(ConnectionUtil.class.getName());
     
     private static Connection DB_CONNECTION = null;
@@ -46,9 +45,10 @@ public class ConnectionUtil {
     private static final String PASS = "";
     
     /**
-     * Constructor
+     * Fungsi untuk mengambil Koneksi database yang sudah dibuat.
+     * @return <code>Connection</code>
      */
-    private ConnectionUtil() {
+    public static Connection getConnection() {
         try {
             // Register Driver yang akan digunakan
             Class.forName(JDBC_DRIVER);
@@ -57,29 +57,6 @@ public class ConnectionUtil {
         } catch (ClassNotFoundException | SQLException ex) {
             LOG.log(Level.WARNING, "Error: {0}", ex.getMessage());
         }
-    }
-    
-    /**
-     * Membuat instance baru apabila belum ada
-     * 
-     * @return <code>ConnectionUtil</code>
-     */
-    public static ConnectionUtil getInstance() {
-        if (connectionUtil == null) {
-            connectionUtil = new ConnectionUtil();
-        }
-        return connectionUtil;
-    }
-    
-    /**
-     * Fungsi untuk mengambil Koneksi database yang sudah dibuat.
-     * @return <code>Connection</code>
-     */
-    public static Connection getConnection() {
-        if (DB_CONNECTION == null) {
-            getInstance();
-        }
-        
         return DB_CONNECTION;
     }
     
