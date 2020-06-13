@@ -33,22 +33,23 @@ import arsip.surat.view.panel.PanelMenuPetugas;
 public class DashboardView extends javax.swing.JFrame {
 
     private static DashboardView dashboardView;
-    
+    private final PanelMenuPetugas panel;
+
     /**
      * Creates new form DashboardView
      */
     private DashboardView() {
         initComponents();
         new DragWindowUtil().enable(DashboardView.this);
-        PanelMenuPetugas panel = new PanelMenuPetugas();
+        this.panel = new PanelMenuPetugas();
         baseTabbedPanel.addTab("   Petugas   ", panel);
     }
-    
+
+    //<editor-fold defaultstate="collapsed" desc="Singleton pattern">
     /**
      * Singleton pattern
-     * <editor-fold defaultstate="collapsed" desc="Singleton pattern">
-     * 
-     * @return 
+     *
+     * @return
      */
     public static DashboardView getInstance() {
         if (dashboardView == null) {
@@ -190,10 +191,11 @@ public class DashboardView extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-    
+    // <editor-fold defaultstate="collapsed" desc="Merubah gambar icon minimize ketika mouse entered">
+
     /**
      * Merubah gambar icon minimize ketika mouse entered
-     * <editor-fold defaultstate="collapsed" desc="Merubah gambar icon minimize ketika mouse entered">
+     *
      *
      * @param evt
      */
@@ -201,9 +203,9 @@ public class DashboardView extends javax.swing.JFrame {
         this.setState(LoginView.ICONIFIED);
     }//GEN-LAST:event_minimizedIconMouseClicked
     // </editor-fold>
+    //<editor-fold defaultstate="collapsed" desc="Merubah gambar icon minimized seperti semula">
     /**
      * Merubah gambar icon minimized seperti semula
-     * <editor-fold defaultstate="collapsed" desc="Merubah gambar icon minimized seperti semula">
      *
      * @param evt
      */
@@ -211,9 +213,10 @@ public class DashboardView extends javax.swing.JFrame {
         minimizedIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arsip/surat/assets/images/minimized-hover~1.png")));
     }//GEN-LAST:event_minimizedIconMouseEntered
 // </editor-fold>
+    //<editor-fold defaultstate="collapsed" desc="Mengubah state window menjadi iconified ketika icon diklik">
+
     /**
      * Mengubah state window menjadi iconified ketika icon diklik
-     * <editor-fold defaultstate="collapsed" desc="Mengubah state window menjadi iconified ketika icon diklik">
      *
      * @param evt
      */
@@ -221,9 +224,9 @@ public class DashboardView extends javax.swing.JFrame {
         minimizedIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arsip/surat/assets/images/minimized~1.png")));
     }//GEN-LAST:event_minimizedIconMouseExited
     // </editor-fold>
+    //<editor-fold defaultstate="collapsed" desc="Aksi ketika tombol diklik, maka aplikasi keluar">
     /**
      * Aksi ketika tombol diklik, maka aplikasi keluar
-     * <editor-fold defaultstate="collapsed" desc="Aksi ketika tombol diklik, maka aplikasi keluar">
      *
      * @param evt
      */
@@ -231,9 +234,9 @@ public class DashboardView extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_exitIconMouseClicked
     // </editor-fold>
+    //<editor-fold defaultstate="collapsed" desc="Merubah gambar icon exit ketika mouse entered">
     /**
      * Merubah gambar icon exit ketika mouse entered
-     * <editor-fold defaultstate="collapsed" desc="Merubah gambar icon exit ketika mouse entered">
      *
      * @param evt
      */
@@ -241,9 +244,9 @@ public class DashboardView extends javax.swing.JFrame {
         exitIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arsip/surat/assets/images/close-hover~1.png")));
     }//GEN-LAST:event_exitIconMouseEntered
     // </editor-fold>
+    //<editor-fold defaultstate="collapsed" desc="Merubah gambar icon exit seperti semula">
     /**
      * Merubah gambar icon exit seperti semula
-     * <editor-fold defaultstate="collapsed" desc="Merubah gambar icon exit seperti semula">
      *
      * @param evt
      */
@@ -251,9 +254,9 @@ public class DashboardView extends javax.swing.JFrame {
         exitIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arsip/surat/assets/images/close~1.png")));
     }//GEN-LAST:event_exitIconMouseExited
     // </editor-fold>
+    //<editor-fold defaultstate="collapsed" desc="Membuat frame tidak bisa didrag">
     /**
      * Membuat frame tidak bisa didrag
-     * <editor-fold defaultstate="collapsed" desc="Membuat frame tidak bisa didrag">
      *
      * @param evt
      */
@@ -261,7 +264,7 @@ public class DashboardView extends javax.swing.JFrame {
         // DO NOTHING
     }//GEN-LAST:event_contentPanelMouseClicked
     // </editor-fold>
-    
+
     /**
      * @param args the command line arguments
      */
@@ -282,7 +285,7 @@ public class DashboardView extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(DashboardView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         //</editor-fold>
 
         /* Create and display the form */
@@ -290,7 +293,7 @@ public class DashboardView extends javax.swing.JFrame {
             DashboardView.getInstance().setVisible(true);
         });
     }
-    
+
     // <editor-fold defaultstate="collapsed" desc="Deklarasi Variabel">
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel basePanel;
