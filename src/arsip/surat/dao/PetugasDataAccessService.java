@@ -87,7 +87,11 @@ public class PetugasDataAccessService implements PetugasDao {
                             ps.setString(3, petugas.getNama());
                             ps.setString(4, petugas.getJabatan());
                             ps.setString(5, petugas.getUsername());
-                            ps.setString(6, petugas.getPassword());
+                            if (petugas.getPassword() == null) {
+                                ps.setString(6, oldPetugas.getPassword());
+                            } else {
+                                ps.setString(6, petugas.getPassword());
+                            }
                             ps.setString(7, petugas.getLevel());
                             ps.setString(8, petugas.getNama_bidang());
                             ps.executeUpdate();

@@ -27,6 +27,7 @@ import arsip.surat.model.Bidang;
 import arsip.surat.model.Petugas;
 import arsip.surat.service.BidangService;
 import arsip.surat.service.PetugasService;
+import arsip.surat.util.CustomPopup;
 import arsip.surat.util.PasswordUtil;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -38,6 +39,8 @@ import javax.swing.ImageIcon;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Base64;
@@ -146,6 +149,35 @@ public class PanelMenuPetugas extends javax.swing.JPanel {
                     JTable selected = (JTable) e.getSource();
                     Point point = e.getPoint();
                     int rowSelected = selected.rowAtPoint(point);
+                    buttonEdit.setVisible(true);
+                    buttonHapus.setVisible(true);
+                    selectedPetugas = selected.getModel().getValueAt(rowSelected, 5).toString();
+                }
+            }
+        });
+        tabelPetugas.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_UP
+                        || e.getKeyCode() == KeyEvent.VK_DOWN
+                        || e.getKeyCode() == KeyEvent.VK_KP_UP 
+                        || e.getKeyCode() == KeyEvent.VK_KP_DOWN) {
+                    JTable selected = (JTable) e.getSource();
+                    int rowSelected = -1;
+                    switch (e.getKeyCode()) {
+                        case KeyEvent.VK_UP:
+                        case KeyEvent.VK_KP_UP:
+                            if (selected.getSelectedRow() != 0) {
+                                rowSelected = selected.getSelectedRow() - 1;
+                            } else rowSelected = selected.getSelectedRow();
+                            break;
+                        case KeyEvent.VK_DOWN:
+                        case KeyEvent.VK_KP_DOWN:
+                            if (selected.getSelectedRow() != totalPetugas - 1) {
+                                rowSelected = selected.getSelectedRow() + 1;
+                            } else rowSelected = selected.getSelectedRow();
+                            break;
+                    }
                     buttonEdit.setVisible(true);
                     buttonHapus.setVisible(true);
                     selectedPetugas = selected.getModel().getValueAt(rowSelected, 5).toString();
@@ -417,6 +449,11 @@ public class PanelMenuPetugas extends javax.swing.JPanel {
 
         panelDaftarPetugas.setBackground(new java.awt.Color(0, 143, 143));
         panelDaftarPetugas.setPreferredSize(new java.awt.Dimension(990, 460));
+        panelDaftarPetugas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelDaftarPetugasMouseClicked(evt);
+            }
+        });
         panelDaftarPetugas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel3.setBackground(new java.awt.Color(0, 102, 102));
@@ -669,6 +706,7 @@ public class PanelMenuPetugas extends javax.swing.JPanel {
         tf_tambahUsername.setForeground(new java.awt.Color(255, 255, 255));
         tf_tambahUsername.setText("Username");
         tf_tambahUsername.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), "Username", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Bahnschrift", 0, 14), new java.awt.Color(150, 255, 255))); // NOI18N
+        tf_tambahUsername.setCaretColor(new java.awt.Color(150, 255, 255));
         tf_tambahUsername.setMargin(new java.awt.Insets(2, 10, 2, 10));
         tf_tambahUsername.setNextFocusableComponent(cb_editBidang);
         panelTambahPetugas.add(tf_tambahUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 50, 290, 60));
@@ -678,6 +716,7 @@ public class PanelMenuPetugas extends javax.swing.JPanel {
         tf_tambahNip.setForeground(new java.awt.Color(255, 255, 255));
         tf_tambahNip.setText("NIP");
         tf_tambahNip.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), "NIP", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Bahnschrift", 0, 14), new java.awt.Color(150, 255, 255))); // NOI18N
+        tf_tambahNip.setCaretColor(new java.awt.Color(150, 255, 255));
         tf_tambahNip.setMargin(new java.awt.Insets(2, 10, 2, 10));
         tf_tambahNip.setNextFocusableComponent(tf_editNama);
         panelTambahPetugas.add(tf_tambahNip, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 290, 60));
@@ -687,6 +726,7 @@ public class PanelMenuPetugas extends javax.swing.JPanel {
         tf_tambahJabatan.setForeground(new java.awt.Color(255, 255, 255));
         tf_tambahJabatan.setText("Jabatan");
         tf_tambahJabatan.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), "Jabatan", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Bahnschrift", 0, 14), new java.awt.Color(150, 255, 255))); // NOI18N
+        tf_tambahJabatan.setCaretColor(new java.awt.Color(150, 255, 255));
         tf_tambahJabatan.setMargin(new java.awt.Insets(2, 10, 2, 10));
         tf_tambahJabatan.setNextFocusableComponent(tf_editUsername);
         panelTambahPetugas.add(tf_tambahJabatan, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, 290, 60));
@@ -696,6 +736,7 @@ public class PanelMenuPetugas extends javax.swing.JPanel {
         tf_tambahNama.setForeground(new java.awt.Color(255, 255, 255));
         tf_tambahNama.setText("Nama");
         tf_tambahNama.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), "Nama", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Bahnschrift", 0, 14), new java.awt.Color(150, 255, 255))); // NOI18N
+        tf_tambahNama.setCaretColor(new java.awt.Color(150, 255, 255));
         tf_tambahNama.setMargin(new java.awt.Insets(2, 10, 2, 10));
         tf_tambahNama.setNextFocusableComponent(tf_editJabatan);
         panelTambahPetugas.add(tf_tambahNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 290, 60));
@@ -838,6 +879,7 @@ public class PanelMenuPetugas extends javax.swing.JPanel {
         tf_editUsername.setForeground(new java.awt.Color(255, 255, 255));
         tf_editUsername.setText("Username");
         tf_editUsername.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), "Username", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Bahnschrift", 0, 14), new java.awt.Color(150, 255, 255))); // NOI18N
+        tf_editUsername.setCaretColor(new java.awt.Color(150, 255, 255));
         tf_editUsername.setMargin(new java.awt.Insets(2, 10, 2, 10));
         tf_editUsername.setNextFocusableComponent(cb_editBidang);
         panelEditPetugas.add(tf_editUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 50, 290, 60));
@@ -847,6 +889,7 @@ public class PanelMenuPetugas extends javax.swing.JPanel {
         tf_editNip.setForeground(new java.awt.Color(255, 255, 255));
         tf_editNip.setText("NIP");
         tf_editNip.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), "NIP", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Bahnschrift", 0, 14), new java.awt.Color(150, 255, 255))); // NOI18N
+        tf_editNip.setCaretColor(new java.awt.Color(150, 255, 255));
         tf_editNip.setMargin(new java.awt.Insets(2, 10, 2, 10));
         tf_editNip.setNextFocusableComponent(tf_editNama);
         panelEditPetugas.add(tf_editNip, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 290, 60));
@@ -856,6 +899,7 @@ public class PanelMenuPetugas extends javax.swing.JPanel {
         tf_editJabatan.setForeground(new java.awt.Color(255, 255, 255));
         tf_editJabatan.setText("Jabatan");
         tf_editJabatan.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), "Jabatan", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Bahnschrift", 0, 14), new java.awt.Color(150, 255, 255))); // NOI18N
+        tf_editJabatan.setCaretColor(new java.awt.Color(150, 255, 255));
         tf_editJabatan.setMargin(new java.awt.Insets(2, 10, 2, 10));
         tf_editJabatan.setNextFocusableComponent(tf_editUsername);
         panelEditPetugas.add(tf_editJabatan, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, 290, 60));
@@ -865,6 +909,7 @@ public class PanelMenuPetugas extends javax.swing.JPanel {
         tf_editNama.setForeground(new java.awt.Color(255, 255, 255));
         tf_editNama.setText("Nama");
         tf_editNama.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), "Nama", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Bahnschrift", 0, 14), new java.awt.Color(150, 255, 255))); // NOI18N
+        tf_editNama.setCaretColor(new java.awt.Color(150, 255, 255));
         tf_editNama.setMargin(new java.awt.Insets(2, 10, 2, 10));
         tf_editNama.setNextFocusableComponent(tf_editJabatan);
         panelEditPetugas.add(tf_editNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 290, 60));
@@ -931,30 +976,14 @@ public class PanelMenuPetugas extends javax.swing.JPanel {
                 .setNama_bidang(cb_editBidang.getSelectedItem().toString());    // set bidang petugas
         int updateStatus = petugasService.updatePetugasByNIP(selectedPetugas, editedPetugas);
         switch (updateStatus) {
-            case 0: { // menampilkan Popup pesan gagal
-                JOptionPane jOptionPane = new JOptionPane(
-                        "Gagal mengupdate data, silahkan ulangi kembali!",
-                        JOptionPane.ERROR_MESSAGE);
-                JDialog jDialog = jOptionPane.createDialog(panelManagePetugas, "Gagal!");
-                jDialog.setModal(false);
-                jDialog.setVisible(true);
-                new Timer(3000, (ActionEvent e) -> {
-                    jDialog.setVisible(false);
-                }).start();
-            }
-            break;
-            case 1: { // menampilkan Popup pesan berhasil
-                JOptionPane jOptionPane = new JOptionPane(
-                        "Berhasil mengupdate data!",
-                        JOptionPane.INFORMATION_MESSAGE);
-                JDialog jDialog = jOptionPane.createDialog(panelManagePetugas, "Sukses!");
-                jDialog.setModal(false);
-                jDialog.setVisible(true);
-                new Timer(3000, (ActionEvent e) -> {
-                    jDialog.setVisible(false);
-                }).start();
-            }
-            break;
+            case 0: // menampilkan Popup pesan gagal
+                CustomPopup.createErrorPopup(panelManagePetugas, "Gagal mengupdate data, silahkan ulangi kembali!", "Gagal!");
+                break;
+            case 1: // menampilkan Popup pesan berhasil
+                CustomPopup.createInformationPopup(panelManagePetugas, "Berhasil mengupdate data!", "Sukses!");
+                buttonKembaliEditActionPerformed(evt);
+                buttonRefreshDataMouseClicked(null);
+                break;
         }
     }//GEN-LAST:event_buttonSimpanActionPerformed
 
@@ -981,7 +1010,16 @@ public class PanelMenuPetugas extends javax.swing.JPanel {
 
     private void buttonSimpanPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSimpanPasswordActionPerformed
         String newPassword = String.valueOf(jpf_editPassword.getPassword());
-        petugasService.updatePasswordByNIP(selectedPetugas, newPassword);
+        int status = petugasService.updatePasswordByNIP(selectedPetugas, newPassword);
+        switch (status) {
+            case 0:
+                CustomPopup.createErrorPopup(panelEditPassword, "Gagal mengupdate passowrd!\nHarap ulangi beberapa saat lagi!", "Gagal!");
+                break;
+            case 1:
+                CustomPopup.createInformationPopup(panelEditPetugas, "Berhasil mengubah password!", "Sukses!");
+                buttonUbahPasswordActionPerformed(evt);
+                break;
+        }
     }//GEN-LAST:event_buttonSimpanPasswordActionPerformed
 
     private void buttonTambahDataMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonTambahDataMouseEntered
@@ -1034,13 +1072,13 @@ public class PanelMenuPetugas extends javax.swing.JPanel {
         newPetugas.setNama(tf_tambahNama.getText());                            // set Nama petugas baru
         newPetugas.setJabatan(tf_tambahJabatan.getText());                      // set Jabatan petugas baru
         newPetugas.setUsername(tf_tambahUsername.getText());                    // set Username petugas baru
-        String plainPassword = 
-                String.valueOf(jpf_tambahPassword.getPassword());               // ambil password dari Password Field
+        String plainPassword
+                = String.valueOf(jpf_tambahPassword.getPassword());               // ambil password dari Password Field
         String salt = newPetugas.getUsername() + " " + plainPassword;           // buat salt dari username dan password
         byte[] encryptSalt = salt.getBytes();                                   // konversi string menjadi byte[]
         salt = Base64.getEncoder().encodeToString(encryptSalt);                 // encode salt dengan base64
-        String encryptPassword = 
-                PasswordUtil.generateSecurePassword(plainPassword, salt);       // membuat inputan password dienkripsi
+        String encryptPassword
+                = PasswordUtil.generateSecurePassword(plainPassword, salt);       // membuat inputan password dienkripsi
         newPetugas.setPassword(encryptPassword);                                // set Password petugas baru
         newPetugas
                 .setNama_bidang(cb_tambahBidang.getSelectedItem().toString());  // set bidang petugas baru
@@ -1069,6 +1107,8 @@ public class PanelMenuPetugas extends javax.swing.JPanel {
                 new Timer(3000, (ActionEvent e) -> {
                     jDialog.setVisible(false);
                 }).start();
+                buttonKembaliEditActionPerformed(evt);
+                buttonRefreshDataMouseClicked(null);
             }
             break;
         }
@@ -1091,6 +1131,12 @@ public class PanelMenuPetugas extends javax.swing.JPanel {
         panelMainButton.setVisible(false);
         panelBantuan.setVisible(true);
     }//GEN-LAST:event_buttonInfoMouseClicked
+
+    private void panelDaftarPetugasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelDaftarPetugasMouseClicked
+        tabelPetugas.clearSelection();
+        buttonEdit.setVisible(false);
+        buttonHapus.setVisible(false);
+    }//GEN-LAST:event_panelDaftarPetugasMouseClicked
 
     // <editor-fold defaultstate="collapsed" desc="Fungsi untuk mengelola Text Field pada panel Edit Petugas">
     /**

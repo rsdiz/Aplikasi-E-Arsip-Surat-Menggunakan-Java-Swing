@@ -14,6 +14,7 @@
         </data>
         <spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
             <word>ada</word>
+            <word>akan</word>
             <word>Aksi</word>
             <word>apabila</word>
             <word>aplikasi</word>
@@ -25,20 +26,29 @@
             <word>cocok</word>
             <word>dan</word>
             <word>dari</word>
+            <word>dengan</word>
+            <word>detik</word>
             <word>dibuat</word>
             <word>didrag</word>
             <word>diklik</word>
+            <word>ditampilkan</word>
             <word>ditemukan</word>
             <word>fitur</word>
             <word>Fungsi</word>
             <word>Gagal</word>
             <word>gambar</word>
+            <word>hilang</word>
             <word>iconified</word>
             <word>Implementasi</word>
+            <word>informasi</word>
+            <word>ingin</word>
+            <word>inputan</word>
+            <word>judul</word>
             <word>ke</word>
             <word>Keluar</word>
             <word>ketika</word>
             <word>koneksi</word>
+            <word>lamanya</word>
             <word>maka</word>
             <word>Masuk</word>
             <word>Membersihkan</word>
@@ -49,6 +59,7 @@
             <word>Menampilkan</word>
             <word>mengaktifkan</word>
             <word>mengambil</word>
+            <word>Mengatur</word>
             <word>Mengembalikan</word>
             <word>Mengenkripsi</word>
             <word>menghapus</word>
@@ -56,16 +67,21 @@
             <word>menjadi</word>
             <word>menjalankan</word>
             <word>Merubah</word>
+            <word>otomatis</word>
             <word>pada</word>
             <word>Pengarsipan</word>
+            <word>pesan</word>
             <word>Petugas</word>
             <word>Pindah</word>
             <word>proses</word>
             <word>salah</word>
             <word>satu</word>
+            <word>sebuah</word>
             <word>semua</word>
             <word>semula</word>
+            <word>sendirinya</word>
             <word>seperti</word>
+            <word>sesuai</word>
             <word>Sistem</word>
             <word>sudah</word>
             <word>Sukses</word>
@@ -73,6 +89,7 @@
             <word>tombol</word>
             <word>untuk</word>
             <word>Utilitas</word>
+            <word>waktu</word>
         </spellchecker-wordlist>
     </configuration>
 </project>
